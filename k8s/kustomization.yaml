@@ -1,0 +1,9 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+secretGenerator:
+- name: pt-dh-config
+  envs:
+  - .env

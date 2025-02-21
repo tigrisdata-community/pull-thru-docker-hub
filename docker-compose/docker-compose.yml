@@ -1,0 +1,7 @@
+services:
+  registry:
+    image: mirror.gcr.io/library/registry:2
+    restart: always
+    ports:
+      - 5000:5000
+    env_file: .env

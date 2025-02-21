@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pt-dh
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "Request-Id: $req_id";
+spec:
+  tls:
+    - hosts:
+      - pt-dh.yolo-swag.com
+      secretName: pt-dh-public-tls
+  rules:
+  - host: pt-dh.yolo-swag.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: pt-dh
+            port: 
+              name: http

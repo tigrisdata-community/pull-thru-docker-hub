@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pt-dh
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pt-dh
+  template:
+    metadata:
+      labels:
+        app: pt-dh
+    spec:
+      containers:
+      - name: pt-dh
+        image: mirror.gcr.io/library/registry:2
+        envFrom:
+        - secretRef:
+            name: pt-dh-config
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+        ports:
+        - containerPort: 5000
